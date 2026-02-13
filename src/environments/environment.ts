@@ -1,3 +1,3 @@
 export const environment = {
-    baseUrl: "http://localhost:5163/"
+    baseUrl: "https://computercomparator-c5gudbcgd4hyeeaa.centralus-01.azurewebsites.net/"
 };
