@@ -1,0 +1,37 @@
+@if (offer) {
+  <div class="flex-container">
+    <img src="{{ offer.photo }}">
+  </div>
+    <h1>{{ offer.title }}</h1>
+    <p class="memory"><b>RAM Capacity</b> {{ offer.memoryCapacity }} GB</p>
+    @if (offer.storageSize < 1000) {
+      <p class="storage"><b>Storage Size:</b> {{ offer.storageSize }} GB</p>
+    }
+    @else {
+      <p class="storage"><b>Storage size:</b> {{ offer.storageSize / 1000 }} TB</p>
+    }
+    <p class="price"><b>Woot! Price:</b> ${{ offer.price }}</p>
+ 
+ <div class="flex-container">
+    <button class="flex-item" mat-stroked-button (click)="goBack()">
+      <mat-icon>navigate_before</mat-icon>
+      Back
+    </button>
+    @if (isBookmarked) {
+      <button class="flex-item remove-bookmark" mat-stroked-button (click)="removeBookmark()">
+        <mat-icon>bookmark_remove</mat-icon>
+        Remove Bookmark
+      </button>
+    }
+    @else {
+      <button class="flex-item add-bookmark" mat-flat-button (click)="bookmark()">
+        <mat-icon>bookmark_add</mat-icon>
+        Bookmark
+      </button>
+    }
+    <button class="flex-item view-on-woot" mat-flat-button (click)="viewOnWoot()">
+      <mat-icon>output</mat-icon>
+      View on Woot!
+    </button>
+ </div>
+}

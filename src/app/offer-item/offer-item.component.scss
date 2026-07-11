@@ -1,0 +1,14 @@
+img, h1, p, .flex-container {
+    max-width: 768px;
+    margin: 10px auto;
+    line-height: 1.25em;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+}
+
+.flex-container .flex-item:last-child {
+    margin-left: auto;
+}

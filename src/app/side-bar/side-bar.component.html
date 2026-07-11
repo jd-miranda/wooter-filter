@@ -1,0 +1,16 @@
+<h2>Filters</h2>
+<!-- https://material.angular.io/components/checkbox/examples#checkbox-reactive-forms -->
+<section [formGroup]="filterForm">
+    <div formGroupName="memory">
+        <h3>Memory Capacity</h3>
+        <p><mat-checkbox formControlName="8">8 GB</mat-checkbox></p>
+        <p><mat-checkbox formControlName="16">16 GB</mat-checkbox></p>
+        <p><mat-checkbox formControlName="32">32 GB</mat-checkbox></p>
+    </div>
+    <div formGroupName="storage"> <!-- Scope down to nested group. -->
+        <h3>Storage Size</h3>
+        <p><mat-checkbox formControlName="256">256 GB</mat-checkbox></p>
+        <p><mat-checkbox formControlName="512">512 GB</mat-checkbox></p>
+        <p><mat-checkbox formControlName="1000">1 TB</mat-checkbox></p>
+    </div>
+</section>

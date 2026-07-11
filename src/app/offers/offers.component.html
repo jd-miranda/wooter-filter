@@ -1,0 +1,59 @@
+<mat-drawer-container> <!-- Component controls drawer open/close. -->
+  <!-- Non-navigation, hence drawer rather than side-nav. -->
+  <mat-drawer mode="side" opened>
+    <app-side-bar (selectedFiltersChanged)="onFiltersChange($event)"></app-side-bar>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="flex-container">
+      <h2 class="flex-item">Offers</h2>
+      <mat-form-field class="flex-item">
+          <mat-label>Sort By</mat-label>
+          <!-- Adapted from https://material.angular.dev/components/select/examples#select-reactive-form -->
+          <mat-select [formControl]="sortControl">
+            @for (option of sortOptions; track option) {
+              <mat-option [value]="option.value">{{option.viewValue}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+    </div>
+    @if (pagedOffers) {
+      <mat-grid-list cols="3">
+      @for (offer of pagedOffers; track offer.id) {
+        <mat-grid-tile>
+          <!--
+            Adapted from example in Angular Material documentation
+            at https://material.angular.io/components/card/examples#card-fancy
+          -->
+          <mat-card [routerLink]="['/offers', offer.category.toLowerCase(), offer.id]">
+            <img mat-card-image src="{{ offer.photo }}">
+            <mat-card-header>
+              <mat-card-title>{{ offer.title }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-icon class="item">memory</mat-icon>
+              <p class="item">{{ offer.memoryCapacity }} GB</p>
+              <mat-icon class="item">storage</mat-icon>
+              @if (offer.storageSize < 1000) {
+                <p class="item">{{ offer.storageSize }} GB</p>
+              }
+              @else {
+                <p class="item">{{ offer.storageSize / 1000 }} TB</p>
+              }
+              <!--
+                Currency denomination can be safely hard-coded because
+                Woot! does not ship outside of the contiguous 48 United States.
+                See: https://www.woot.com/faq?ref=w_ngf_rp&tab=account-and-ordering
+              -->
+              <p id="offer-price">${{ offer.price }}</p>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      }
+      </mat-grid-list>
+    } @else {
+      <p><em>Loading...</em></p>
+    }
+    <mat-paginator [length]="length" [pageSize]="pageSize" (page)="onPageChange($event)">
+    </mat-paginator>
+  </mat-drawer-content>
+</mat-drawer-container>

@@ -1,0 +1,18 @@
+<header>
+    <mat-toolbar>
+        <a [routerLink]="['/']">
+          <mat-icon fontIcon="home"></mat-icon>
+        </a>
+  
+        <a id="desktops" mat-flat-button color="primary" [routerLink]="['/offers', 'desktops']" [queryParams]="{page: 0}">Desktops</a>
+        <a id="laptops" mat-flat-button color="primary" [routerLink]="['/offers', 'laptops']" [queryParams]="{page: 0}">Laptops</a>
+        <span class="separator"></span>
+        <a id="bookmarks" mat-flat-button color="primary" [routerLink]="['/bookmarks']">Bookmarks</a>
+        @if (isLoggedIn) {
+          <a id="logout" mat-flat-button color="primary" [routerLink]="['/login']" (click)="onLogout()">Logout</a>
+        }
+        @else {
+          <a id="login" mat-flat-button color="primary" [routerLink]="['/login']">Login</a>
+        }
+    </mat-toolbar>
+  </header>

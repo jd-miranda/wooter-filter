@@ -1,0 +1,13 @@
+.container {
+    max-width: 840px;
+}
+
+mat-card {
+    height: 100%;
+    width: 100%;
+    cursor: pointer; /* Convey that click leads to individual offer-item view. */
+}
+
+mat-card img {
+    width: 100%;
+}

@@ -1,0 +1,30 @@
+<div class="container">
+@if (bookmarks) {
+    <mat-grid-list cols="3">
+    @for (bookmark of bookmarks; track bookmark.id) {
+      <mat-grid-tile>
+        <!--
+          Adapted from example in Angular Material documentation
+          at https://material.angular.io/components/card/examples#card-fancy
+        -->
+        <mat-card [routerLink]="['/offers', bookmark.category, bookmark.configurationId]">
+          <img mat-card-image src="{{ bookmark.photo }}">
+          <mat-card-header>
+            <mat-card-title>{{ bookmark.title }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <!--
+              Currency denomination can be safely hard-coded because
+              Woot! does not ship outside of the contiguous 48 United States.
+              See: https://www.woot.com/faq?ref=w_ngf_rp&tab=account-and-ordering
+            -->
+            <p>${{ bookmark.price }}</p>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    }
+    </mat-grid-list>
+  } @else {
+    <p><em>Loading...</em></p>
+  }
+</div>
