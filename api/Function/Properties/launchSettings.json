@@ -3,7 +3,6 @@
     "Lambda Runtime API": {
       "commandName": "Project",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
         "AWS_LAMBDA_RUNTIME_API": "localhost:5050",
         "AWS_PROFILE": "default",
         "AWS_REGION": "us-east-1"

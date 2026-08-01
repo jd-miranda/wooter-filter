@@ -11,15 +11,22 @@ using Server.Services.Interfaces;
 
 var services = new ServiceCollection();
 
-var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+// TODO: Secrets Manager
 
-var configuration = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false)
-        .AddJsonFile($"appsettings.{environment}.json", optional: true)
-        .AddUserSecrets<Program>()
-        .AddEnvironmentVariables()
-        .Build();
+var builder = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddUserSecrets<Program>()
+    .AddEnvironmentVariables();
+
+if (Environment.GetEnvironmentVariable("AWS_LAMBDA_RUNTIME_API")?.Contains("localhost") is true or null)
+{
+    builder.AddInMemoryCollection(new Dictionary<string, string?>
+    {
+        ["ConnectionStrings:DefaultConnection"] = "Server=(localdb)\\MSSQLLocalDB;Database=ComputerComparator;Trusted_Connection=True;"
+    });
+}
+
+var configuration = builder.Build();
 
 services.AddDbContext<WootComputersSourceContext>(options =>
     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
